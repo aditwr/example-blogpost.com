@@ -9,7 +9,8 @@ class PostController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Post'
+            'title' => 'Post',
+            'active' => 'blog',
         ];
         return view('post.index', $data);
     }

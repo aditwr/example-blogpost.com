@@ -2,8 +2,16 @@
 
 @section('main')
 <div class="container-fluid row gx-0">
-    <div class="col">
+    {{-- ads one in desktop mode --}}
+    <div class="col d-none d-lg-block">
         <div class="bg-secondary me-lg-4 my-1 d-flex vh-100">
+            <p class="m-auto display-4 text-white">Ads</p>
+        </div>
+    </div>
+
+    {{-- ans one in tablet made & under --}}
+    <div class="col d-block d-lg-none" >
+        <div class="bg-secondary me-lg-4 my-1 d-flex">
             <p class="m-auto display-4 text-white">Ads</p>
         </div>
     </div>
@@ -87,10 +95,10 @@
             </div>
         
             <div class="container mx-0 mt-3 mb-1">
-                <div class="row row-cols-1 row-cols-lg-3 g-3">
+                <div class="row row-cols-1 row-cols-lg-3 row-cols-xl-4 g-3">
                     @foreach ($posts as $post)
                         <div class="col">
-                            <div class="card pb-4">
+                            <div class="card pb-4 " style="min-height:500px">
                                 <img src="assets/img/post/post-img.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                 <h5 class="card-title m-0">{{ $post->title }}</h5>
@@ -109,10 +117,25 @@
         
         </div>
     </div>
-    <div class="col">
+
+    {{-- ads two in desktop mode --}}
+    <div class="col d-none d-lg-block">
         <div class="bg-secondary ms-lg-4 my-1 d-flex vh-100">
             <p class="m-auto display-4 text-white">Ads</p>
         </div>
     </div>
+
+    {{-- ans two in tablet made & under --}}
+    <div class="col d-block d-lg-none">
+        <div class="bg-secondary me-lg-4 my-1 d-flex">
+            <p class="m-auto display-4 text-white">Ads</p>
+        </div>
+    </div>
+
+    {{-- paginations link --}}
+    <div class="d-flex justify-content-center mt-5">
+        {{ $posts->links() }}
+    </div>
+
 </div>
 @endsection

@@ -13,7 +13,7 @@ class PostController extends Controller
         $data = [
             'title' => 'All Post',
             'active' => 'blog',
-            'posts' => Post::with(['category', 'user'])->get(),
+            'posts' => Post::with(['category', 'user'])->paginate(8),
             'categories' => Category::all()
         ];
         return view('post.index', $data);

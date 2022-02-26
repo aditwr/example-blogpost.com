@@ -7,6 +7,8 @@
             <p class="m-auto display-4 text-white">Ads</p>
         </div>
     </div>
+
+    {{-- main --}}
     <div class="col-lg-8">
         <div class="container">
             <div class="container-fluid row row-cols-1 row-cols-lg-3 gx-0 mb-1 mb-lg-0">
@@ -16,7 +18,7 @@
                     </a>
                 </div>
                 <div class="col d-flex justify-content-center align-self-center">
-                    <h3 class="h3 text-dark">All Post</h3>
+                    <h3 class="h3 text-dark">{{ $title }}</h3>
                 </div>
                 <div class="col d-flex align-self-center justify-content-center justify-content-lg-end">
                     <form action="/search" class="d-block w-75">
@@ -31,11 +33,9 @@
             <hr class="my-0">
             <div class="container-fluid shadow-sm bg-light">
                 <div class="py-3 row justify-content-between px-0">
-                    <a href="/category" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >Web Programming</a>
-                    <a href="/category" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >Web Design</a>
-                    <a href="/category" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >App Development</a>
-                    <a href="/category" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >Software Development</a>
-                    <a href="/category" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >Game Development</a>
+                    @foreach ($categories as $category)
+                        <a href="/blog/category/{{ $category->slug }}" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >{{ $category->name }}</a>
+                    @endforeach
                 </div>
         
             </div>
@@ -46,30 +46,30 @@
                 <div class="carousel-inner">
         
                     <div class="carousel-item active position-relative" data-bs-interval="10000">
-                        <a href="/blog/post" class="text-decoration-none opacity-75">
+                        <a href="blog/category/{{ $categories[0]->slug }}" class="text-decoration-none opacity-75">
                             <div class="position-absolute text-white" 
                             style="z-index: 10; display:flex; height: 600px; align-items:center; top:-10%;">
-                                <h3 class="display-4 bg-dark px-5 py-3">Web Programming</h3>
+                                <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[0]->name }}</h3>
                             </div>
                         </a>
                     <img src="assets/img/post/hero-1.jpg" class="d-block w-100 img-fluid" alt="...">
                     </div>
         
                     <div class="carousel-item" data-bs-interval="2000">
-                        <a href="/blog/post" class="text-decoration-none opacity-75">
+                        <a href="blog/category/{{ $categories[1]->slug }}" class="text-decoration-none opacity-75">
                             <div class="position-absolute text-white" 
                             style="z-index: 10; display:flex; height: 600px; align-items:center; top:-10%;">
-                                <h3 class="display-4 bg-dark px-5 py-3">App Development</h3>
+                                <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[1]->name }}</h3>
                             </div>
                         </a>
                     <img src="assets/img/post/hero-2.jpg" class="d-block w-100 img-fluid" alt="...">
                     </div>
         
                     <div class="carousel-item">
-                        <a href="/blog/post" class="text-decoration-none opacity-75">
+                        <a href="blog/category/{{ $categories[2]->slug }}" class="text-decoration-none opacity-75">
                             <div class="position-absolute text-white" 
                             style="z-index: 10; display:flex; height: 600px; align-items:center; top:-10%;">
-                                <h3 class="display-4 bg-dark px-5 py-3">Software Development</h3>
+                                <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[2]->name }}</h3>
                             </div>
                         </a>
                     <img src="assets/img/post/hero-3.jpg" class="d-block w-100 img-fluid" alt="...">
@@ -88,18 +88,21 @@
         
             <div class="container mx-0 mt-3 mb-1">
                 <div class="row row-cols-1 row-cols-lg-3 g-3">
-                    <div class="col">
-                        <div class="card pb-4">
-                            <img src="assets/img/post/post-img.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h5 class="card-title m-0">Post Title</h5>
-                              <p class="text-muted m-0">by Author's Name</p>
-                              <p class="badge bg-secondary">Category</p>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
+                    @foreach ($posts as $post)
+                        <div class="col">
+                            <div class="card pb-4">
+                                <img src="assets/img/post/post-img.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title m-0">{{ $post->title }}</h5>
+                                <p class="text-muted m-0">by {{ $post->user->username }}</p>
+                                <p class="badge bg-secondary">{{ $post->category->name }}</p>
+                                <p class="card-text">{{ $post->excerpt }}</p>
+                                <a href="#" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
+                                </div>
                             </div>
-                          </div>
-                    </div>
+                        </div>
+                        
+                    @endforeach
                     
                 </div>
             </div>

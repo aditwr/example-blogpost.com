@@ -9,7 +9,8 @@ class AboutController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'About'
+            'title' => 'About',
+            'active' => 'about'
         ];
         return view('about.index', $data);
     }

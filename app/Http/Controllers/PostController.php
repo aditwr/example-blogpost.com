@@ -18,4 +18,14 @@ class PostController extends Controller
         ];
         return view('post.index', $data);
     }
+
+    public function showSinglePost(Post $post)
+    {
+        $data = [
+            'title' => $post->title,
+            'active' => 'blog',
+            'post' => $post
+        ];
+        return view('post.single', $data);
+    }
 }

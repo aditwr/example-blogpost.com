@@ -2,22 +2,12 @@
 
 @section('main')
 <div class="container-fluid row gx-0">
-    {{-- ads one in desktop mode --}}
-    <div class="col d-none d-lg-block">
-        <div class="bg-secondary me-lg-4 my-1 d-flex vh-100">
-            <p class="m-auto display-4 text-white">Ads</p>
-        </div>
-    </div>
-
-    {{-- ans one in tablet made & under --}}
-    <div class="col d-block d-lg-none" >
-        <div class="bg-secondary me-lg-4 my-1 d-flex">
-            <p class="m-auto display-4 text-white">Ads</p>
-        </div>
-    </div>
+    
+    {{-- include ads one --}}
+    @include('partials.ads.ads1')
 
     {{-- main --}}
-    <div class="col-lg-8">
+    <div class="col-lg-9">
         <div class="container">
             <div class="container-fluid row row-cols-1 row-cols-lg-3 gx-0 mb-1 mb-lg-0">
                 <div class="col d-flex align-self-end justify-content-end justify-content-lg-start">
@@ -40,9 +30,9 @@
             </div>
             <hr class="my-0">
             <div class="container-fluid shadow-sm bg-light">
-                <div class="py-3 row justify-content-between px-0">
+                <div class="py-3 row row-cols-1 row-cols-xl-5 justify-content-between px-0">
                     @foreach ($categories as $category)
-                        <a href="/blog/category/{{ $category->slug }}" class="text-dark text-muted col-lg-2 d-flex justify-content-center" >{{ $category->name }}</a>
+                        <a href="/blog/category/{{ $category->slug }}" class="text-dark text-muted d-flex justify-content-center" >{{ $category->name }}</a>
                     @endforeach
                 </div>
         
@@ -101,11 +91,13 @@
                             <div class="card pb-4 " style="min-height:500px">
                                 <img src="assets/img/post/post-img.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                <h5 class="card-title m-0">{{ $post->title }}</h5>
-                                <p class="text-muted m-0">by {{ $post->user->username }}</p>
-                                <p class="badge bg-secondary">{{ $post->category->name }}</p>
-                                <p class="card-text">{{ $post->excerpt }}</p>
-                                <a href="#" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
+                                    <a href="blog/post/{{ $post->slug }}" class="text-decoration-none text-dark">
+                                        <h5 class="card-title m-0">{{ $post->title }}</h5>
+                                    </a>
+                                    <p class="text-muted m-0">by {{ $post->user->username }}</p>
+                                    <p class="badge bg-secondary">{{ $post->category->name }}</p>
+                                    <p class="card-text">{{ $post->excerpt }}</p>
+                                    <a href="blog/post/{{ $post->slug }}" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
                                 </div>
                             </div>
                         </div>
@@ -118,19 +110,8 @@
         </div>
     </div>
 
-    {{-- ads two in desktop mode --}}
-    <div class="col d-none d-lg-block">
-        <div class="bg-secondary ms-lg-4 my-1 d-flex vh-100">
-            <p class="m-auto display-4 text-white">Ads</p>
-        </div>
-    </div>
-
-    {{-- ans two in tablet made & under --}}
-    <div class="col d-block d-lg-none">
-        <div class="bg-secondary me-lg-4 my-1 d-flex">
-            <p class="m-auto display-4 text-white">Ads</p>
-        </div>
-    </div>
+    {{-- inlcude ads two --}}
+    @include('partials.ads.ads2')
 
     {{-- paginations link --}}
     <div class="d-flex justify-content-center mt-5">

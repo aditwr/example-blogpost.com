@@ -60,7 +60,7 @@
         </div>
     
         <div class="container text-center my-3">
-            <a href="/posts" class="btn btn-primary text-decoration-none text-light">Back to Blog page</a>
+            <a href="/blog" class="btn btn-primary text-decoration-none text-light">Back to Blog page</a>
         </div>
     </div>
 

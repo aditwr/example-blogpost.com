@@ -28,4 +28,11 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    // query scope local
+    public function scopeLocal_Search($query, $keyword)
+    {
+        return $query->where('title', 'like', '%' . $keyword . '%')
+            ->orWhere('body', 'like', '%' . $keyword . '%');
+    }
 }

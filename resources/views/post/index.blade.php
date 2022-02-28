@@ -19,9 +19,9 @@
                     <h3 class="h3 text-dark">{{ $title }}</h3>
                 </div>
                 <div class="col d-flex align-self-center justify-content-center justify-content-lg-end">
-                    <form action="/search" class="d-block w-75">
+                    <form action="/blog" method="GET" class="d-block w-75">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search Post..">
+                            <input type="text" name="search" class="form-control" placeholder="Search Post.." value="{{ request()->input('search') }}">
                             <button class="btn btn-success" type="submit">Search</button>
                         </div>
                         
@@ -39,7 +39,7 @@
             </div>
         
         
-            <div id="carouselExampleInterval" class="carousel slide shadow-sm rounded-bottom" data-bs-ride="carousel"
+            <div id="carouselExampleInterval" class="carousel slide shadow-sm rounded-bottom @if(request()->input('search')) d-none @endif" data-bs-ride="carousel"
             style="width:100%; max-height: 600px; display:flex; overflow:hidden; align-items:center">
                 <div class="carousel-inner">
         
@@ -105,6 +105,16 @@
                     @endforeach
                     
                 </div>
+            </div>
+
+            {{-- not found notification --}}
+            <div class="@if($posts->count()) d-none @endif row row-cols-1 row-cols-lg-2 align-items-center justify-content-center" style="min-height:50vh">
+                <span class="col col-lg-1 row align-items-start justify-content-center">
+                    <img src="/assets/img/about.png" alt="notif" class="" style="width: 100px;">
+                </span>
+                <span class="col col-lg-6  display-6 row align-items-center">
+                    <p class="display-6">Post with keyword "{{ request('search') }}" not found!</p>
+                </span>
             </div>
         
         </div>

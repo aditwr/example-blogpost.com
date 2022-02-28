@@ -39,7 +39,7 @@
     }
     </style>
   </head>
-  <body>
+  <body >
     @include('partials.navbar')
     <div class="container-fluid m-0 p-0">
         @yield('main')

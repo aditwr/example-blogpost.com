@@ -35,4 +35,11 @@ class Post extends Model
         return $query->where('title', 'like', '%' . $keyword . '%')
             ->orWhere('body', 'like', '%' . $keyword . '%');
     }
+
+    public function scopeLocal_Category($query, $slug)
+    {
+        return $query->whereHas('category', function ($query) use ($slug) { // closure for constraint / instance post yang diambil harus memenuhi syarat / constarint yang ada di dalam closure ini
+            $query->where('slug', $slug);
+        });
+    }
 }

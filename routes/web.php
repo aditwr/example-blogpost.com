@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/blog', [PostController::class, 'index']);
 Route::get('/blog/post/{post:slug}', [PostController::class, 'showSinglePost']);
 Route::get('/about', [AboutController::class, 'index']);

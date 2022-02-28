@@ -12,10 +12,17 @@ class PostController extends Controller
     {
         $title = 'All Post';
         $posts = Post::latest()->with(['category', 'user']);
+
+
         $request->whenHas('search', function ($keyword) use ($posts) {
             return $posts->local_search($keyword);
         });
         ($request->filled('search')) ? $title = "Search : " . $request->search : '';
+
+        $request->whenHas('category', function ($slug) use ($posts) {
+            return $posts->local_category($slug);
+        });
+        ($request->filled('category')) ? $title = "Category : " . $request->category : '';
 
         $data = [
             'title' => $title,
@@ -34,5 +41,19 @@ class PostController extends Controller
             'post' => $post
         ];
         return view('post.single', $data);
+    }
+
+    // error bacause it posts return collection,
+    // but pagination needs an model instance
+    public function postByCategory(Category $category)
+    {
+        $data = [
+            'title' => $category->name . " Post",
+            'active' => 'blog',
+            'posts' => $category->posts->load('user', 'category'),
+            'categories' => Category::latest()->get()
+        ];
+
+        return view('post.index', $data);
     }
 }

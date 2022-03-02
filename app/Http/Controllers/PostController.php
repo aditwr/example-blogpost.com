@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $title = 'All Post';
-        $posts = Post::latest()->with(['category', 'user']);
+        $posts = Post::latest()->with(['category', 'user']); // eloquent method return query builder instance, it allow you to chain constraint
 
 
         $request->whenHas('search', function ($keyword) use ($posts) {
@@ -24,10 +24,15 @@ class PostController extends Controller
         });
         ($request->filled('category')) ? $title = "Category : " . $request->category : '';
 
+        $request->whenHas('author', function ($author_username_value) use ($posts) {
+            return $posts->local_author($author_username_value);
+        });
+        ($request->filled('author')) ? $title = 'Author : ' . $request->author : '';
+
         $data = [
             'title' => $title,
             'active' => 'blog',
-            'posts' => $posts->paginate(8)->withQueryString(),
+            'posts' => $posts->paginate(8)->withQueryString(), // paginate() will return paginator / lengtawarepagonator instance
             'categories' => Category::latest()->get()
         ];
         return view('post.index', $data);
@@ -43,14 +48,17 @@ class PostController extends Controller
         return view('post.single', $data);
     }
 
-    // error bacause it posts return collection,
-    // but pagination needs an model instance
+    // collection : load() all()
+    // builder / query builder : get() with() paginate() links()
+
+    // can't use paginate because paginate is method in query builder instance, 
+    // this $category->posts definitely return collection as a result so it can be converted to builder instance
     public function postByCategory(Category $category)
     {
         $data = [
             'title' => $category->name . " Post",
             'active' => 'blog',
-            'posts' => $category->posts->load('user', 'category'),
+            'posts' => $category->posts->load(['user', 'category']),
             'categories' => Category::latest()->get()
         ];
 

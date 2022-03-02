@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->text('body');
-            $table->timestamp('published_at')->nullable(); // generate automatic when inserted
+            $table->timestamp('modified_at')->nullable(); // generate automatic when inserted
             $table->timestamps(); // created_at modified_at
         });
     }

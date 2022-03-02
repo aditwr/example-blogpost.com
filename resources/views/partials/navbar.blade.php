@@ -21,7 +21,31 @@
             </ul>
           </div>
           <div class="col-lg-2 d-flex justify-content-end">
-            <a href="/signin" class="btn btn-primary">Sign In</a>
+            @auth
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ auth()->user()->username }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-window-reverse"></i> My Dashboard</a></li>
+                    <li>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log out</button>
+                        </form>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            @else    
+              @if(request()->url() == 'http://example-blogpost.com.test/login' || request()->url() == 'https://example-blogpost.com.test/login')
+                <a href="/register" class="btn btn-success">Sign Up</a>
+              @else
+                <a href="/login" class="btn btn-primary">Sign In</a>
+              @endif
+            @endauth
+
           </div>
       </div>
     </div>

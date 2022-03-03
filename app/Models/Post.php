@@ -55,6 +55,13 @@ class Post extends Model
 
 
 
+
+    public function scopeSearchByKeyword($query_builder_for_post_model, $keyword)
+    {
+        return $query_builder_for_post_model->where('title', 'like', '%' . $keyword . '%')->orWhere('body', 'like', '%' . $keyword . '%');
+    }
+
+
     public function scopeGetPostByCategory($query_builder_for_post_model, $category_slug)
     {
         return $query_builder_for_post_model->whereHas('category', function ($query_builder_for_category_model) use ($category_slug) {

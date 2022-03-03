@@ -9,7 +9,7 @@
     {{-- main --}}
     <div class="col-lg-9">
         <div class="container">
-            <div class="container-fluid row row-cols-1 row-cols-lg-3 gx-0 mb-1 mb-lg-0">
+            <div class="container-fluid row row-cols-1 row-cols-lg-3 gx-0 mb-1 mb-lg-0 mt-2">
                 <div class="col d-flex align-self-end justify-content-end justify-content-lg-start">
                     <a href="/subscribe" class="text-muted">
                         <p class="fs-5 fw-light">Subscribe</p>
@@ -19,7 +19,8 @@
                     <h3 class="h3 text-dark">{{ $title }}</h3>
                 </div>
                 <div class="col d-flex align-self-center justify-content-center justify-content-lg-end">
-                    <form action="/blog" class="d-block w-75">
+                    <form action="/blog/search" class="d-block w-75" method="post">
+                        @csrf
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Search Post.." value="{{ request()->input('search') }}">
                             <button class="btn btn-success" type="submit">Search</button>
@@ -88,7 +89,13 @@
             <div class="row row-cols-1 row-cols-lg-2 gx-0 mt-3">
                 <div class="col-lg-9 mx-0 mb-1">
                     <div class="py-2">
-                        <h3 class="h3 fst-italic">@if(request()->input('search')) Result Post @else Recent Post @endif</h3>
+                        <h3 class="h3 fst-italic">
+                            @empty($hidden_carousel_and_headpost)
+                                Recent Post
+                            @else
+                                Result Post
+                            @endempty
+                        </h3>
                         <hr>
                     </div>
                     @if( $posts->count() )

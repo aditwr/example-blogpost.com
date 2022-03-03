@@ -6,9 +6,9 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse row container-fluid" id="navbarSupportedContent">
-          <div class="col-lg-10 d-flex justify-content-end">
-            <ul class="navbar-nav mb-2 mb-lg-0">
+      <div class="collapse navbar-collapse row container-fluid gx-0" id="navbarSupportedContent">
+          <div class="col-lg-10 d-flex justify-content-center justify-content-lg-end">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-center">
               <li class="nav-item">
                 <a class="nav-link {{ ($active == 'home')? 'active' : '' }}" href="/">Home</a>
               </li>
@@ -20,14 +20,14 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-2 d-flex justify-content-end">
+          <div class="col-lg-2 d-flex justify-content-center justify-content-lg-end gx-0">
             @auth
-              <ul class="navbar-nav ms-auto">
+              <ul class="navbar-nav mx-auto ms-lg-auto">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ auth()->user()->username }}
                 </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <ul class="dropdown-menu dropdown-menu-dark position-absolute" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-window-reverse"></i> My Dashboard</a></li>
                     <li>
                         <form action="/logout" method="post">

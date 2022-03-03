@@ -53,13 +53,18 @@ class PostController extends Controller
 
     // can't use paginate because paginate is method in query builder instance, 
     // this $category->posts definitely return collection as a result so it can be converted to builder instance
-    public function postByCategory(Category $category)
+
+    public function postByCategory($category_slug)
     {
+        $categories = Category::all();
+        $category = Category::where('slug', $category_slug)->get(); // return collection, not 
+        $posts = Post::getPostByCategory($category_slug);
+
         $data = [
-            'title' => $category->name . " Post",
+            'title' => $category[0]->name . ' Post',
             'active' => 'blog',
-            'posts' => $category->posts->load(['user', 'category']),
-            'categories' => Category::latest()->get()
+            'posts' => $posts->paginate(3)->withQueryString(),
+            'categories' => $categories,
         ];
 
         return view('post.index', $data);

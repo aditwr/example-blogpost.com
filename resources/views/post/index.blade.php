@@ -32,7 +32,7 @@
             <div class="container-fluid shadow-sm bg-light">
                 <div class="py-3 row row-cols-1 row-cols-xl-5 justify-content-between px-0">
                     @foreach ($categories as $category)
-                        <a href="/blog?category={{ $category->slug }}" class="text-dark text-muted d-flex justify-content-center" >{{ $category->name }}</a>
+                        <a href="/blog/category/{{ $category->slug }}" class="text-dark text-muted d-flex justify-content-center" >{{ $category->name }}</a>
                     @endforeach
                 </div>
         

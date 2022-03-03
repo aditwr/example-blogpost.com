@@ -52,4 +52,13 @@ class Post extends Model
             $query_builder_for_user_model->where('username', $author_username_value);
         });
     }
+
+
+
+    public function scopeGetPostByCategory($query_builder_for_post_model, $category_slug)
+    {
+        return $query_builder_for_post_model->whereHas('category', function ($query_builder_for_category_model) use ($category_slug) {
+            $query_builder_for_category_model->where('slug', $category_slug);
+        });
+    }
 }

@@ -24,7 +24,8 @@ Route::get('/about', [AboutController::class, 'index']);
 
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
 Route::get('/blog/post/{post:slug}', [PostController::class, 'showSinglePost']);
-Route::get('/blog/category/{category:slug}', [PostController::class, 'postByCategory']);
+Route::get('/blog/category/{category_slug}', [PostController::class, 'postByCategory']);
+Route::get('/blog/author/{author_username}', [PostController::class, 'postByAuthor']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);

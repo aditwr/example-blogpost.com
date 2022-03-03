@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -56,13 +57,32 @@ class PostController extends Controller
 
     public function postByCategory($category_slug)
     {
-        $categories = Category::all();
-        $category = Category::where('slug', $category_slug)->get(); // return collection, not 
-        $posts = Post::getPostByCategory($category_slug);
+        $categories = Category::latest()->get();
+        // for title search
+        $category = Category::where('slug', $category_slug)->get(); // return collection that contains single instance, not single instance directly
+        $posts = Post::getPostByCategory($category_slug); // return query builder for post model
 
         $data = [
             'title' => $category[0]->name . ' Post',
             'active' => 'blog',
+            'hidden_carousel_and_headpost' => true,
+            'posts' => $posts->paginate(3)->withQueryString(),
+            'categories' => $categories,
+        ];
+
+        return view('post.index', $data);
+    }
+
+    public function postByAuthor($author_username)
+    {
+        // for title search 
+        $user = User::where('username', $author_username)->get(); // where() return collection, even if the result if single instance
+        $categories = Category::latest()->get();
+        $posts = Post::getPostByAuthor($author_username); // return query builder for post model
+        $data = [
+            'title' => 'Post published by ' . $user[0]->username,
+            'active' => 'blog',
+            'hidden_carousel_and_headpost' => true,
             'posts' => $posts->paginate(3)->withQueryString(),
             'categories' => $categories,
         ];

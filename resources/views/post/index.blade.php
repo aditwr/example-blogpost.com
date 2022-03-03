@@ -37,14 +37,14 @@
                 </div>
         
             </div>
-        
-            @if(!request()->hasAny(['search', 'category', 'author']))
+            
+            @empty($hidden_carousel_and_headpost)
                 <div id="carouselExampleInterval" class="carousel slide shadow-sm rounded-bottom" data-bs-ride="carousel"
                 style="width:100%; max-height: 600px; display:flex; overflow:hidden; align-items:center">
                     <div class="carousel-inner">
             
                         <div class="carousel-item active position-relative" data-bs-interval="10000">
-                            <a href="blog?category={{ $categories[0]->slug }}" class="text-decoration-none opacity-75">
+                            <a href="blog/category/{{ $categories[0]->slug }}" class="text-decoration-none opacity-75">
                                 <div class="position-absolute text-white" 
                                 style="z-index: 10; display:flex; height: 600px; align-items:center; top:-10%;">
                                     <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[0]->name }}</h3>
@@ -54,7 +54,7 @@
                         </div>
             
                         <div class="carousel-item" data-bs-interval="2000">
-                            <a href="blog?category={{ $categories[1]->slug }}" class="text-decoration-none opacity-75">
+                            <a href="blog/category/{{ $categories[1]->slug }}" class="text-decoration-none opacity-75">
                                 <div class="position-absolute text-white" 
                                 style="z-index: 10; display:flex; height: 600px; align-items:center; top:-10%;">
                                     <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[1]->name }}</h3>
@@ -64,7 +64,7 @@
                         </div>
             
                         <div class="carousel-item">
-                            <a href="blog?category={{ $categories[2]->slug }}" class="text-decoration-none opacity-75">
+                            <a href="blog/category/{{ $categories[2]->slug }}" class="text-decoration-none opacity-75">
                                 <div class="position-absolute text-white" 
                                 style="z-index: 10; display:flex; height: 600px; align-items:center; top:-10%;">
                                     <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[2]->name }}</h3>
@@ -83,16 +83,16 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            @endif
+            @endempty
 
             <div class="row row-cols-1 row-cols-lg-2 gx-0 mt-3">
                 <div class="col-lg-9 mx-0 mb-1">
                     <div class="py-2">
-                        <h3 class="h3 fst-italic">@if(request()->input('search')) Result Post @elseif(request()->category) Result Post @else Recent Post @endif</h3>
+                        <h3 class="h3 fst-italic">@if(request()->input('search')) Result Post @else Recent Post @endif</h3>
                         <hr>
                     </div>
                     @if( $posts->count() )
-                        @if(!request()->hasAny(['search', 'category', 'author']))
+                        @empty($hidden_carousel_and_headpost)
                             <div class="row row-cols-1 row-cols-lg-3 gx-0">
                                 <div class="col">
                                     <div class="card pb-4 " style="min-height:500px">
@@ -101,8 +101,10 @@
                                             <a href="blog/post/{{ $posts[0]->slug }}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title m-0">{{ $posts[0]->title }}</h5>
                                             </a>
-                                            <p class="text-muted m-0">by {{ $posts[0]->user->username }}</p>
-                                            <a href="/blog?category={{ $posts[0]->category->slug }}" class="text-decoration-none text-light">
+                                            <a href="/blog/author/{{ $posts[0]->user->username }}" class="text-decoration-none">
+                                                <p class="text-muted m-0">by {{ $posts[0]->user->username }}</p>
+                                            </a>
+                                            <a href="/blog/category/{{ $posts[0]->category->slug }}" class="text-decoration-none text-light">
                                                 <p class="badge bg-secondary">{{ $posts[0]->category->name }}</p>
                                             </a>
                                             <p class="card-text">{{ $posts[0]->excerpt }}</p>
@@ -117,8 +119,10 @@
                                             <a href="blog/post/{{ $posts[1]->slug }}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title m-0">{{ $posts[1]->title }}</h5>
                                             </a>
-                                            <p class="text-muted m-0">by {{ $posts[1]->user->username }}</p>
-                                            <a href="/blog?category={{ $posts[0]->category->slug }}" class="text-decoration-none text-light">
+                                            <a href="/blog/author/{{ $posts[1]->user->username }}" class="text-decoration-none">
+                                                <p class="text-muted m-0">by {{ $posts[1]->user->username }}</p>
+                                            </a>
+                                            <a href="/blog/category/{{ $posts[1]->category->slug }}" class="text-decoration-none text-light">
                                                 <p class="badge bg-secondary">{{ $posts[1]->category->name }}</p>
                                             </a>
                                             <p class="card-text">{{ $posts[1]->excerpt }}</p>
@@ -134,8 +138,10 @@
                                             <a href="blog/post/{{ $posts[2]->slug }}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title m-0">{{ $posts[2]->title }}</h5>
                                             </a>
-                                            <p class="text-muted m-0">by {{ $posts[2]->user->username }}</p>
-                                            <a href="/blog?category={{ $posts[0]->category->slug }}" class="text-decoration-none text-light">
+                                            <a href="/blog/author/{{ $posts[2]->user->username }}" class="text-decoration-none">
+                                                <p class="text-muted m-0">by {{ $posts[2]->user->username }}</p>
+                                            </a>
+                                            <a href="/blog/category/{{ $posts[2]->category->slug }}" class="text-decoration-none text-light">
                                                 <p class="badge bg-secondary">{{ $posts[2]->category->name }}</p>
                                             </a>
                                             <p class="card-text">{{ $posts[2]->excerpt }}</p>
@@ -144,7 +150,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endempty
 
                         @foreach($posts as $post)
                             <div class="">
@@ -158,8 +164,8 @@
                                         <a href="/blog/post/{{ $post->slug }}" class="text-decoration-none text-dark">
                                             <h5 class="card-title h3">{{ $post->title }}</h5>
                                         </a>
-                                        <p class="text-muted my-0">{{ $post->created_at->format('l, d M Y') }} by <a href="/blog?author={{ $post->user->username }}">{{ $post->user->username }}</a></p>
-                                        <a href="/blog?category={{ $post->category->slug }}" class="my-0">
+                                        <p class="text-muted my-0">{{ $post->created_at->format('l, d M Y') }} by <a href="/blog/author/{{ $post->user->username }}">{{ $post->user->username }}</a></p>
+                                        <a href="/blog/category/{{ $post->category->slug }}" class="my-0">
                                             <p class="badge bg-secondary">{{ $post->category->name }}</p>
                                         </a>
                                         <p class="card-text mb-0">{{ $post->excerpt }}...</p>

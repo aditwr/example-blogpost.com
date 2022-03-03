@@ -61,4 +61,11 @@ class Post extends Model
             $query_builder_for_category_model->where('slug', $category_slug);
         });
     }
+
+    public function scopeGetPostByAuthor($query_builder_for_post_model, $author_username)
+    {
+        return $query_builder_for_post_model->whereHas('user', function ($query_builder_for_user_model) use ($author_username) {
+            $query_builder_for_user_model->where('username', $author_username);
+        });
+    }
 }

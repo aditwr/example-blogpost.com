@@ -29,6 +29,20 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+
+
     // query scope local
     // the purpose of query scope is to chain constraint
     public function scopeLocal_Search($query_builder_for_post_model, $search_keyword)

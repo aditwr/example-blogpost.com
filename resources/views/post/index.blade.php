@@ -43,7 +43,7 @@
                 <div id="carouselExampleInterval" class="carousel slide shadow-sm rounded-bottom" data-bs-ride="carousel"
                 style="width:100%; max-height: 600px; display:flex; overflow:hidden; align-items:center">
                     <div class="carousel-inner">
-            
+                    @if( $categories->count() )
                         <div class="carousel-item active position-relative" data-bs-interval="10000">
                             <a href="blog/category/{{ $categories[0]->slug }}" class="text-decoration-none opacity-75">
                                 <div class="position-absolute text-white" 
@@ -73,7 +73,7 @@
                             </a>
                         <img src="/assets/img/post/hero-3.jpg" class="d-block w-100 img-fluid" alt="...">
                         </div>
-            
+                    @endif
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -100,6 +100,7 @@
                     </div>
                     @if( $posts->count() )
                         @empty($hidden_carousel_and_headpost)
+                            @isset($posts[2])
                             <div class="row row-cols-1 row-cols-lg-3 gx-0">
                                 <div class="col">
                                     <div class="card pb-4 " style="min-height:500px">
@@ -157,6 +158,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endisset
                         @endempty
 
                         @foreach($posts as $post)

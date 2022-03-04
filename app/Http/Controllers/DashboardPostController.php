@@ -16,7 +16,8 @@ class DashboardPostController extends Controller
     {
         // get : /dashboard/posts
         $data = [
-            'title' => 'Dashboard | My Posts'
+            'title' => 'Dashboard | My Posts',
+            'posts' => Post::where('user_id', auth()->user()->id)->get(),
         ];
         return view('dashboard.posts.index', $data);
     }
@@ -50,7 +51,12 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        // get : /dashboard/posts/{post:id}
+        $data = [
+            'title' => $post->title,
+            'post' => $post,
+        ];
+        return view('dashboard.posts.show', $data);
     }
 
     /**

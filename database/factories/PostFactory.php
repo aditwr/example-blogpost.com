@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'user_id' => mt_rand(1, 5),
             'category_id' => mt_rand(1, 5),
             'slug' => $this->faker->unique()->slug(mt_rand(3, 5)),
-            'excerpt' => $this->faker->paragraph(2),
+            'excerpt' => $this->faker->paragraph(1),
             'body' => collect($this->faker->paragraphs(mt_rand(10, 20)))
                 ->map(function ($item) {
                     return "<p>$item</p>";

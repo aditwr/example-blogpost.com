@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0">
     <div class="container">
       <a class="navbar-brand" href="/">
         <img src="/favicon.svg" alt="ex" width="40px" class=""> Blog
@@ -10,13 +10,13 @@
           <div class="col-lg-10 d-flex justify-content-center justify-content-lg-end">
             <ul class="navbar-nav mb-2 mb-lg-0 text-center">
               <li class="nav-item">
-                <a class="nav-link {{ ($active == 'home')? 'active' : '' }}" href="/">Home</a>
+                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ ($active == 'blog')? 'active' : '' }}" href="/blog">Blog</a>
+                <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="/blog">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ ($active == 'about')? 'active' : '' }}" href="/about">About</a>
+                <a class="nav-link {{ Request::is('about') ? 'active' : ''  }}" href="/about">About</a>
               </li>
             </ul>
           </div>

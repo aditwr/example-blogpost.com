@@ -64,7 +64,6 @@ class PostController extends Controller
 
         $data = [
             'title' => $category[0]->name . ' Post',
-            'active' => 'blog',
             'hidden_carousel_and_headpost' => true,
             'posts' => $posts->paginate(3)->withQueryString(),
             'categories' => $categories,
@@ -81,7 +80,6 @@ class PostController extends Controller
         $posts = Post::getPostByAuthor($author_username); // return query builder for post model
         $data = [
             'title' => 'Post published by ' . $user[0]->username,
-            'active' => 'blog',
             'hidden_carousel_and_headpost' => true,
             'posts' => $posts->paginate(3)->withQueryString(),
             'categories' => $categories,

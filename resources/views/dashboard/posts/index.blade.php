@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @section('content_title')
-    <h1 class="h2">Dashboard</h1>
+    <h1 class="h2">My Posts</h1>
 @endsection
 
 @section('main_content')

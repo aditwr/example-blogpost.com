@@ -55,7 +55,7 @@ class DashboardPostController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($request->title) . '-by-' . Str::slug(auth()->user()->username);
-        $validated['excerpt'] = Str::limit(strip_tags($request->body), 100, '...');
+        $validated['excerpt'] = Str::remove('&nbsp;', Str::limit(strip_tags($validated['body']), 100, '...'));
         $validated['user_id'] = auth()->user()->id;
 
 
@@ -113,6 +113,9 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // delete: dashboard/posts/{post:slug}
+        Post::destroy($post->id);
+
+        return redirect('/dashboard/posts')->with('success', 'Post has been deleted!');
     }
 }

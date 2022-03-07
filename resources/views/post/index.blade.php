@@ -101,7 +101,7 @@
                     @if( $posts->count() )
                         @empty($hidden_carousel_and_headpost)
                             @isset($posts[2])
-                            <div class="row row-cols-1 row-cols-lg-3 gx-0">
+                            <div class="row row-cols-1 row-cols-lg-3 gx-0 mb-3">
                                 <div class="col">
                                     <div class="card pb-4 " style="min-height:500px">
                                         <img src="/assets/img/post/post-img.jpg" class="card-img-top" alt="...">

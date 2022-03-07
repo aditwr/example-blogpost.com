@@ -51,7 +51,11 @@
             <div class="bg-light rounded px-3 pb-3 pt-3">
                 <p class="lead">Take action for this Post</p>
                 <a href="/dashboard/posts" class="btn btn-warning mb-1"><span data-feather="edit" ></span> Edit this Post</a>
-                <a href="/dashboard/posts" class="btn btn-danger"><span data-feather="trash-2" ></span> Delete this Post</a>
+                <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline"> 
+                    @method('delete')
+                    @csrf
+                    <button class="btn btn-danger" onclick="return confirm('are you sure?')"><span data-feather="trash-2"></span> Delete this Post</button>
+                  </form>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
     <h3 class="display-5">List of your posts</h3>
 
     @if( session()->has('success') )
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show col-lg-10" role="alert">
       {{ session('success') }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -34,15 +34,18 @@
                 <td>{{ $post->category->name }}</td>
                 <td>{{ $post->created_at->format('l, d M Y') }}</td>
                 <td class="">
-                    <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info text-white">
-                        <span data-feather="eye"></span>
+                    <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info text-white text-decoration-none">
+                        <span data-feather="eye"></span> View
                     </a>
-                    <a href="{{ $post->id }}" class="badge bg-warning text-white">
-                        <span data-feather="edit"></span>
+                    <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning text-white text-decoration-none">
+                        <span data-feather="edit"></span> Edit
                     </a>
-                    <a href="{{ $post->id }}" class="badge bg-danger text-white">
-                        <span data-feather="trash-2"></span>
-                    </a>
+                    
+                    <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline"> 
+                      @method('delete')
+                      @csrf
+                      <button class="badge bg-danger border-0" onclick="return confirm('are you sure?')"><span data-feather="trash-2"></span> Delete</button>
+                    </form>
                 </td>
                 </tr>
             @endforeach

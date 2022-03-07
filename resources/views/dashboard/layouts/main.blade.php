@@ -4,6 +4,10 @@
 
 <head>
     <link rel="stylesheet" href="/css/dashboard.css">
+
+    {{-- Trix Editor --}}
+    <link rel="stylesheet" type="text/css" href="/css/trix.css">
+    <script type="text/javascript" src="/js/trix.js"></script>
 </head>
 
 @include('dashboard.layouts.header')

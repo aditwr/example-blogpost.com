@@ -24,9 +24,9 @@
                         <div class="container my-3 bg-light">
                             <h2 class="display-4 text-center">{{ $post->title }}</h2>
                             <hr>
-                            <p class="my-0">{{ $post->created_at->format('l, d M Y') }} - by <a href="/posts?author={{ $post->user->username }}" class="text-primary">{{ $post->user->name }}</a> - <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></p>
+                            <p class="my-0">{{ $post->created_at->format('l, d M Y') }} - by <a href="/blog/author/{{ $post->user->username }}" class="text-primary">{{ $post->user->name }}</a> - <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></p>
                             
-                            <p class="">Category : <a class="text-decoration-none text-light badge bg-secondary " href="/posts?category={{ $post->category->slug }}">{{ $post->category->name }}</a></p>
+                            <p class="">Category : <a class="text-decoration-none text-light badge bg-secondary " href="/blog/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
                             <div class="d-flex align-items-center overflow-hidden" style="height:400px">
                                 <img src="/assets/img/post/hero-1.jpg" alt="hero_image" class="img-fluid w-100">
                             </div>

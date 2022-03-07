@@ -7,7 +7,15 @@
 @section('main_content')
     <h3 class="display-5">List of your posts</h3>
 
+    @if( session()->has('success') )
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ session('success') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="table-responsive  col-lg-10">
+        <a href="/dashboard/posts/create" class="btn btn-success">Create New Post</a>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -41,5 +49,8 @@
 
           </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+          {{ $posts->links() }}
+        </div>
       </div>
 @endsection

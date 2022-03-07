@@ -50,7 +50,7 @@
         <div class="col-lg-2">
             <div class="bg-light rounded px-3 pb-3 pt-3">
                 <p class="lead">Take action for this Post</p>
-                <a href="/dashboard/posts" class="btn btn-warning mb-1"><span data-feather="edit" ></span> Edit this Post</a>
+                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning mb-1"><span data-feather="edit" ></span> Edit this Post</a>
                 <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline"> 
                     @method('delete')
                     @csrf

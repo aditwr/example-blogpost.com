@@ -11,17 +11,13 @@
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" required value="{{ old('title') }}">
+              <div class="form-text">Post slug is generated automatically, ex : your-post-title-by-{username}</div>
                 @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             
-            <div class="mb-3">
-              <label for="slug" class="form-label">Slug</label>
-              <input type="text" name="slug" class="form-control" id="slug" >
-            </div>
-            
-            <div class="mb-3">
+            <div class="mb-3 col-lg-6">
               <label for="category" class="form-label">Category</label>
               <select name="category_id" class="form-select " required  >
                   @foreach( $categories as $category )
@@ -47,7 +43,7 @@
             </div>
               
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Create Post</button>
           </form>
     </div>
 

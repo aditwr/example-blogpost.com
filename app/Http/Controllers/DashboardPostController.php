@@ -48,11 +48,18 @@ class DashboardPostController extends Controller
     public function store(Request $request)
     {
         // post: dashboard/posts
+
         $validated = $request->validate([
             'title' => ['required', 'max:255'],
             'category_id' => ['required'],
             'body' => ['required'],
+            'image' => ['image', 'file', 'max:1024']
         ]);
+
+        // if user upload an image, store it and save pathname to db
+        if ($request->file('image')) {
+            $validated['image'] = $request->file('image')->store('post-images');
+        }
 
         $validated['slug'] = Str::slug($request->title) . '-by-' . Str::slug(auth()->user()->username);
         $validated['excerpt'] = Str::remove('&nbsp;', Str::limit(strip_tags($validated['body']), 100, '...'));

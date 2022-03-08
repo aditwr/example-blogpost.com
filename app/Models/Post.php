@@ -5,12 +5,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
     use HasFactory;
-    use Sluggable;
 
     public function sluggable(): array
     {
@@ -23,14 +21,8 @@ class Post extends Model
 
 
     // fillable
-    protected $fillable = [
-        'title',
-        'slug',
-        'excerpt',
-        'body',
-        'user_id',
-        'category_id'
-    ];
+    // guard
+    protected $guarded = [];
 
     public function user()
     {

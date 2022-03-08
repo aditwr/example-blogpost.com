@@ -10,29 +10,57 @@
             
     <div class="container mb-3 row gx-0"> 
         <div class="col-lg-10 row justify-content-start m-0">
-            <div class="col">
-                <div class="container mb-3 bg-light rounded pb-4">
-                    <h2 class="display-4 text-center">{{ $post->title }}</h2>
-                    <hr>
-                    <p class="my-0">{{ $post->created_at->format('l, d M Y') }} - by <a href="/blog/author/{{ $post->user->username }}" class="text-primary">{{ $post->user->name }}</a> - <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></p>
+        
+                <div class="container bg-light px-0">
                     
-                    <p class="">Category : <a class="text-decoration-none text-light badge bg-secondary " href="/blog/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
-                    <div class="d-flex align-items-center overflow-hidden" style="height:400px">
-                        <img src="/assets/img/post/hero-1.jpg" alt="hero_image" class="img-fluid w-100">
-                    </div>
-
-                    <article class="my-3">
-                        {{-- deactivate e() / htmlspecialcars function to process tag p in post->body data --}}
-                        {!! $post->body !!}
-                    </article>
-
-                </div>
+                    <div class="container mb-3"> 
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="container my-3 bg-light">
+                                    <h2 class="display-4 text-center">{{ $post->title }}</h2>
+                                    <hr>
+                                    <p class="my-0">{{ $post->created_at->format('l, d M Y') }} - by <a href="/blog/author/{{ $post->user->username }}" class="text-primary">{{ $post->user->name }}</a> - <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></p>
+                                    
+                                    <p class="">Category : <a class="text-decoration-none text-light badge bg-secondary " href="/blog/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>      
+                                </div>
+                                
+                            </div>
                 
-                <div class="container mt-4 row rounded">
-                    <div class="row bg-light ">
+                        </div>
+                    </div>
+        
+                    <div class="d-flex align-items-center overflow-hidden" style="height:400px">
+                        @if( $post->image )
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="hero_image" class="img-fluid w-100">
+                        @else
+                            <img src="/assets/img/post/hero-1.jpg" alt="hero_image" class="img-fluid w-100">
+                        @endif
+                    </div>
+        
+                    <div class="container mb-3"> 
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="container my-3 bg-light">
+                                            
+                                    <article class="my-3">
+                                        {{-- deactivate e() / htmlspecialcars function to process tag p in post->body data --}}
+                                        {!! $post->body !!}
+                                    </article>
+                
+                                </div>
+                                
+                            </div>
+                
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <div class="container-fluid mt-4 p-2">
+                    <div class="row bg-light">
                         <form action="" class="my-3">
                             <h4>Leave a Reply</h4>
-                            <div class="form-floating">
+                            <div class="form-floating px-2">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                                 <label for="floatingTextarea2" class="text-disabled">Comments</label>
                                 <button class="btn btn-secondary mt-2" type="submit">Post Comment</button>
@@ -41,9 +69,6 @@
                        
                     </div>
                 </div>
-
-            </div>
-
         </div>
 
         {{-- side menu --}}

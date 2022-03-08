@@ -101,10 +101,16 @@
                     @if( $posts->count() )
                         @empty($hidden_carousel_and_headpost)
                             @isset($posts[2])
-                            <div class="row row-cols-1 row-cols-lg-3 gx-0 mb-3">
+                            <div class="row row-cols-1 row-cols-lg-3 gx-1 mb-3">
                                 <div class="col">
-                                    <div class="card pb-4 " style="min-height:500px">
-                                        <img src="/assets/img/post/post-img.jpg" class="card-img-top" alt="...">
+                                    <div class="card pb-4 card-img-top" style="min-height:400px">
+                                        <div class="d-flex align-items-center overflow-hidden" style="height:200px">
+                                            @if( $posts[0]->image )
+                                                <img src="{{ asset('storage/' . $posts[0]->image) }}" alt="hero_image" class="img-fluid w-100 " style="min-height:100%;">
+                                            @else
+                                                <img src="/assets/img/post/post-img.jpg" alt="hero_image" class="img-fluid w-100" style="min-height:100%;">
+                                            @endif
+                                        </div>
                                         <div class="card-body">
                                             <a href="blog/post/{{ $posts[0]->slug }}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title m-0">{{ $posts[0]->title }}</h5>
@@ -121,8 +127,14 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="card pb-4 " style="min-height:500px">
-                                        <img src="/assets/img/post/post-img.jpg" class="card-img-top" alt="...">
+                                    <div class="card pb-4 " style="min-height:400px">
+                                        <div class="d-flex align-items-center overflow-hidden" style="height:200px">
+                                            @if( $posts[1]->image )
+                                                <img src="{{ asset('storage/' . $posts[1]->image) }}" alt="hero_image" class="img-fluid w-100 " style="min-height:100%;">
+                                            @else
+                                                <img src="/assets/img/post/post-img.jpg" alt="hero_image" class="img-fluid w-100" style="min-height:100%;">
+                                            @endif
+                                        </div>
                                         <div class="card-body">
                                             <a href="blog/post/{{ $posts[1]->slug }}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title m-0">{{ $posts[1]->title }}</h5>
@@ -140,8 +152,14 @@
                                 </div>
 
                                 <div class="col">
-                                    <div class="card pb-4 " style="min-height:500px">
-                                        <img src="/assets/img/post/post-img.jpg" class="card-img-top" alt="...">
+                                    <div class="card pb-4 " style="min-height:400px">
+                                        <div class="d-flex align-items-center overflow-hidden" style="height:200px">
+                                            @if( $posts[2]->image )
+                                                <img src="{{ asset('storage/' . $posts[2]->image) }}" alt="hero_image" class="img-fluid w-100 " style="min-height:100%;">
+                                            @else
+                                                <img src="/assets/img/post/post-img.jpg" alt="hero_image" class="img-fluid w-100" style="min-height:100%;">
+                                            @endif
+                                        </div>
                                         <div class="card-body">
                                             <a href="blog/post/{{ $posts[2]->slug }}" class="text-decoration-none text-dark">
                                                 <h5 class="card-title m-0">{{ $posts[2]->title }}</h5>
@@ -164,23 +182,29 @@
                         @foreach($posts as $post)
                             <div class="">
                                 <div class="card mb-3 border-end-0 border-start-0 bg-light">
-                                    <div class="row g-0">
-                                    <div class="col-md-4 d-flex align-items-center overflow-hidden">
-                                        <img src="/assets/img/post/post-img.jpg" class="img-fluid rounded-start" style="min-height:100%;" alt="post-image">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                        <a href="/blog/post/{{ $post->slug }}" class="text-decoration-none text-dark">
-                                            <h5 class="card-title h3">{{ $post->title }}</h5>
-                                        </a>
-                                        <p class="text-muted my-0">{{ $post->created_at->format('l, d M Y') }} by <a href="/blog/author/{{ $post->user->username }}">{{ $post->user->username }}</a></p>
-                                        <a href="/blog/category/{{ $post->category->slug }}" class="my-0">
-                                            <p class="badge bg-secondary">{{ $post->category->name }}</p>
-                                        </a>
-                                        <p class="card-text mb-0">{{ $post->excerpt }}...</p>
-                                        <p class="card-text my-0"><small class="text-muted">Last updated {{ $post->created_at->diffForHumans() }}</small></p>
+                                    <div class="row g-0 p-0">
+                                        <div class="col-md-4 d-flex align-items-center overflow-hidden p-0">
+                                            <div class="d-flex align-items-center overflow-hidden p-0 m-0" style="height:200px">
+                                                @if( $post->image )
+                                                    <img src="{{ asset('storage/' . $post->image) }}" alt="hero_image" class="img-fluid w-100" style="min-height:100%;">
+                                                @else
+                                                    <img src="/assets/img/post/post-img.jpg" class="img-fluid rounded-start" style="min-height:100%;" alt="post-image">
+                                                @endif
+                                            </div>    
                                         </div>
-                                    </div>
+                                        <div class="col-md-8 py-1">
+                                            <div class="card-body py-0">
+                                                <a href="/blog/post/{{ $post->slug }}" class="text-decoration-none text-dark my-0">
+                                                    <h5 class="card-title h3 my-0">{{ $post->title }}</h5>
+                                                </a>
+                                                <p class="text-muted my-0">{{ $post->created_at->format('l, d M Y') }} by <a href="/blog/author/{{ $post->user->username }}">{{ $post->user->username }}</a></p>
+                                                <a href="/blog/category/{{ $post->category->slug }}" class="mt-0 mb-1">
+                                                    <p class="badge bg-secondary mt-0">{{ $post->category->name }}</p>
+                                                </a>
+                                                <p class="card-text my-0">{{ $post->excerpt }}...</p>
+                                                <p class="card-text my-0"><small class="text-muted">Last updated {{ $post->created_at->diffForHumans() }}</small></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

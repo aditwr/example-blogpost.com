@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DashboardPostController extends Controller
@@ -126,13 +127,24 @@ class DashboardPostController extends Controller
             'title' => ['required', 'max:255'],
             'category_id' => ['required'],
             'body' => ['required'],
+            'image' => ['required', 'file', 'max:1024'],
         ];
         // if slug is exists in db, pass the validate for slug
         if ($newSlug != $post->slug) {
             $rules['slug'] = ['required', 'unique:posts,slug'];
         }
 
+        // validate
         $validated = $request->validate($rules);
+
+        // if user upload an image
+        if ($request->file('image')) {
+            // delete the old image from storage
+            Storage::delete($post->image);
+
+            // store new image, and update image name in db
+            $validated['image'] = $request->file('image')->store('post-images');
+        }
 
         Post::where('id', $post->id)->update($validated);
 
@@ -147,6 +159,12 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // if this post has an image, delete it first
+        if ($post->image) {
+            Storage::delete($post->image);
+        }
+
+        // delete data in db
         // delete: dashboard/posts/{post:slug}
         Post::destroy($post->id);
 

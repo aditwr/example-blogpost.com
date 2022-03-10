@@ -70,14 +70,8 @@
 
             imagePreview.style.display = 'block';
 
-            // instantiated FileReader Class
-            const oFReader = new FileReader();
-            // call method readAsDataURL, parameter: image from input
-            oFReader.readAsDataURL(imageInput.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imagePreview.src = oFREvent.target.result;
-            }
+            // show the image preview
+            imagePreview.src = URL.createObjectURL(imageInput.files[0]);
 
         }
     </script>

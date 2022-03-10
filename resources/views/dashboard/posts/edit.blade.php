@@ -6,7 +6,7 @@
 
 @section('main_content')
     <div class="col-md-8 col-lg-6 mb-5">
-        <form method="POST" action="/dashboard/posts/{{ $post->slug }}">
+        <form method="POST" action="/dashboard/posts/{{ $post->slug }}" enctype="multipart/form-data" >
             @method('PUT')
             @csrf
             <div class="mb-3">
@@ -32,6 +32,22 @@
               
             </div>
 
+            <div class="mb-3 col-lg-7">
+                <label for="image" class="form-label">Post Image</label>
+                {{-- send the old image pathname, use it to delete image --}}
+                <input type="hidden" name="oldImage" value="{{ $post->image }}" >
+                @if( $post->image )
+                    <img src="{{ asset('storage/'.$post->image) }}" class="img-preview img-fluid mb-1 d-block">
+                @else
+                    <img class="img-preview img-fluid mb-1">
+                @endif
+                <input name="image" class="form-control @error('image') is-invalid @enderror" type="file" id="image"
+                onchange="previewImage()" >
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 @error('body')
@@ -53,4 +69,22 @@
             display:none;
         }
     </style>
+    <script>
+        function previewImage(){
+            const imageInput = document.querySelector('#image');
+            const imagePreview = document.querySelector('.img-preview');
+
+            imagePreview.style.display = 'block';
+
+            // instantiated FileReader Class
+            const oFReader = new FileReader();
+            // call method readAsDataURL, parameter: image from input
+            oFReader.readAsDataURL(imageInput.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imagePreview.src = oFREvent.target.result;
+            }
+
+        }
+    </script>
 @endsection

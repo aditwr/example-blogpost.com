@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0">
     <div class="container">
       <a class="navbar-brand" href="/">
-        <img src="/favicon.svg" alt="ex" width="40px" class=""> Blog
+        <img src="/favicon.svg" alt="ex" width="30px" class=""> Blog
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-2 d-flex justify-content-center justify-content-lg-end gx-0">
+          <div class="col-lg-2 d-flex justify-content-center justify-content-lg-end gx-0 my-auto">
             @auth
               <ul class="navbar-nav mx-auto ms-lg-auto">
                 <li class="nav-item dropdown">

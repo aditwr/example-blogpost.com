@@ -1,125 +1,104 @@
-<!doctype html>
-<html lang="en" class="h-100">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-    @include('partials.favicon')
-    <title>{{ $title }}</title>
+@extends('layouts.main-nonav-nofooter')
+@include('sweetalert::alert')
 
-    @include('partials.bootstrap-css-link')
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+@section('main')
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-            }
-        }
-        /* Custom default button */
-        .btn-secondary,
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-        color: #333;
-        text-shadow: none; /* Prevent inheritance from `body` */
-        }
-
-
-        /*
-        * Base structure
-        */
-
-        body {
-        text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-        box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-        background-image: url('assets/img/home-background.jpg');
-        }
-
-        .cover-container {
-        max-width: 42em;
-        }
-
-
-        /*
-        * Header
-        */
-
-        .nav-masthead .nav-link {
-        padding: .25rem 0;
-        font-weight: 700;
-        color: rgba(255, 255, 255, .5);
-        background-color: transparent;
-        border-bottom: .25rem solid transparent;
-        }
-
-        .nav-masthead .nav-link:hover,
-        .nav-masthead .nav-link:focus {
-        border-bottom-color: rgba(255, 255, 255, .25);
-        }
-
-        .nav-masthead .nav-link + .nav-link {
-        margin-left: 1rem;
-        }
-
-        .nav-masthead .active {
-        color: #fff;
-        border-bottom-color: #fff;
-        }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
-  </head>
-  <body class="d-flex h-100 text-center text-white bg-dark">
-    
-<div class=" d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-        <div class="row">
-            <div class="col-md-4">
-                <a href="/" class="text-decoration-none text-white">
-                    <h3 class="mb-0">exBlog</h3>
+<nav class="navbar navbar-expand-lg navbar-dark p-0 position-absolute w-100" style="z-index: 10">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/favicon.svg" alt="ex" width="30px" class=""> Blog
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse row container-fluid gx-0" id="navbarSupportedContent">
+          <div class="col-lg-10 d-flex justify-content-center justify-content-lg-end">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-center">
+              <li class="nav-item">
+                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="/blog">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ Request::is('about') ? 'active' : ''  }}" href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 d-flex justify-content-center justify-content-lg-end gx-0">
+            @auth
+              <ul class="navbar-nav mx-auto ms-lg-auto">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ auth()->user()->username }}
                 </a>
-            </div>
-            <div class="col-md-4">
-                <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    <a class="nav-link" href="/blog">Blog</a>
-                    <a class="nav-link" href="/about">About</a>
-                    
-                </nav>
-            </div>
-            <div class="col-md-4">
-                <a href="/signin" class="btn btn-light">Sign In</a>
-            </div>
+                <ul class="dropdown-menu dropdown-menu-dark position-absolute" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-window-reverse"></i> My Dashboard</a></li>
+                    <li>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log out</button>
+                        </form>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            @else    
+              @if(request()->url() == 'http://example-blogpost.com.test/login' || request()->url() == 'https://example-blogpost.com.test/login')
+                <a href="/register" class="btn btn-success">Sign Up</a>
+              @else
+                <a href="/login" class="btn btn-light text-dark-50 fw-bolder">Sign In</a>
+              @endif
+            @endauth
+
+          </div>
+      </div>
+    </div>
+</nav>
+
+<main class="d-flex align-items-center justify-content-center position-absolute" 
+style="bottom: 0; top: 0; left: 0; right: 0; background-image: url('assets/img/home-background.jpg'); 
+background-position: center top">
+    <div class="text-center text-white">
+        <h1><span id="typed"></span></h1>
+        <div class="d-flex justify-content-center px-lg-5 mx-lg-5">
+            <p class="lead px-4 px-lg-5 mx-lg-5">Thanks for visiting my website. This is a simple Blog Application I've made with Laravel 8. This application provides many blog application features, such as reading, writing, editing, and deleting blog posts. I'll very be glad if you like to dig deeper into this website.</p>    
         </div>
-    </header>
+        <p class="lead">
+            <a href="/blog" class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark">View Blog</a>
+        </p>
 
-  <main class="px-3">
-    <h1>Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-      <a href="/blog" class="btn btn-lg btn-secondary fw-bold border-white bg-white">View Post</a>
-    </p>
-  </main>
+    </div>
 
-  <footer class="mt-auto text-white-50">
-    <p>Made with love, by <a href="https://instagram.com/adityawr388" class="text-white">@adityawr388</a>.</p>
-  </footer>
-</div>
+</main>
+
+<footer class="position-absolute w-100" style="bottom: 10px">
+    <p class="text-center text-white text-muted">Made with <span style="color: #e25555;">&#9829;</span> by <a class="text-white text-decoration-none" href="http://instagram.com/adityaa.wr">@adityaa.wr</a> </p>
+</footer>
 
 
-    @include('partials.bootstrap-js-link')
-  </body>
-</html>
+{{-- cdn for typed.js --}}
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script type="text/javascript">
+    Swal.fire({
+      title: "Hi!, so glad to see you.",
+      text: 'Hi, I am Aditya, a newbie on Web Development. Thanks for visiting this website, you\'re very kind and generous :)',
+      imageUrl: "{{ asset('/assets/img/aditya.profile.png') }}",
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+      confirmButtonText: 'You\'re welcome',
+    })
+    
+    // auto typing animations with typed.js
+    var typed = new Typed("#typed", {
+        strings: ['Simple Blog Application', 'Made with Laravel 8'],
+        typeSpeed: 120,
+        delaySpeed: 200,
+        loop: true
+    });
+</script>
+
+@endsection

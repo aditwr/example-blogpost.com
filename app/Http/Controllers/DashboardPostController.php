@@ -161,6 +161,11 @@ class DashboardPostController extends Controller
     {
         // if this post has an image, delete it first
         if ($post->image) {
+            /**
+             * Deletes the file from the disk.
+             * @param  string  $path
+             * @return bool
+             */
             Storage::delete($post->image);
         }
 

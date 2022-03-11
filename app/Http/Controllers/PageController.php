@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Alert;
+
 
 class PageController extends Controller
 {
@@ -13,6 +15,13 @@ class PageController extends Controller
             'active' => 'home'
         ];
         return view('home.index', $data);
+    }
+    public function homeBuilt()
+    {
+        $data = [
+            'title' => 'Built',
+        ];
+        return view('home.built', $data);
     }
 
     public function about()

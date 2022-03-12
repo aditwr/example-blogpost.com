@@ -26,6 +26,12 @@
               Post Categories
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('dashboard/addadmin*') ? 'active' : '' }} " href="/dashboard/addadmin">
+              <span data-feather="user"></span>
+              Add Admin
+            </a>
+          </li>
         </ul>
       @endcan
       

@@ -1,9 +1,6 @@
 @extends('layouts.main-nonav-nofooter')
-@include('sweetalert::alert')
 
 @section('main')
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark p-0 position-absolute w-100" style="z-index: 10">
     <div class="container">

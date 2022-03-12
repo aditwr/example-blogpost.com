@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddAdminController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
@@ -43,3 +44,7 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+
+Route::get('/dashboard/addadmin', [AddAdminController::class, 'index'])->middleware('admin');
+Route::post('/dashboard/addadmin', [AddAdminController::class, 'add'])->middleware('admin');
+Route::delete('/dashboard/addadmin', [AddAdminController::class, 'remove'])->middleware('admin');

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class AdminCategoryController extends Controller
 {
@@ -31,7 +34,10 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Create Category',
+        ];
+        return view('dashboard.categories.create', $data);
     }
 
     /**
@@ -42,7 +48,25 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation for forms
+        $validated_data_input = $request->validate([
+            'name' => ['required', 'unique:categories,name'],
+            'image' => ['image', 'file', 'max:1024']
+        ]);
+
+        if ($request->file('image')) {
+            $validated_data_input['image'] = $request->file('image')->store('category_images');
+        };
+
+        // generate slug for category
+        $validated_data_input['slug'] = Str::slug($request->name);
+
+        // store
+        if (Category::create($validated_data_input)) {
+            return redirect('dashboard/categories')->with('success', 'New Category has been added!');
+        }
+
+        return back()->with('fail', 'New Category can\'t be added to database');
     }
 
     /**
@@ -64,7 +88,11 @@ class AdminCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $data = [
+            'title' => 'Rename Category',
+            'category' => $category,
+        ];
+        return view('dashboard.categories.edit', $data);
     }
 
     /**
@@ -76,7 +104,30 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $new_slug = Str::slug($request->name);
+
+        $rules = [
+            'name' => ['required', 'max:50'],
+            'image' => ['image', 'file', 'max:1024'],
+        ];
+
+        $validated_data_input = $request->validate($rules);
+        $validated_data_input['slug'] = $new_slug;
+
+        if ($request->file('image')) {
+            // check category image
+            if ($category->image) {
+                Storage::delete($category->image);
+
+                $validated_data_input['image'] = $request->file('image')->store('category_images');
+            };
+        }
+
+        if (Category::where('id', $category->id)->update($validated_data_input)) {
+            return redirect('dashboard/categories')->with('success', 'One Category has been updated!');
+        };
+
+        return back()->with('fail', 'Category can\'t be updated!');
     }
 
     /**
@@ -87,6 +138,15 @@ class AdminCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if (Category::destroy($category->id)) {
+            // delete category image too
+            if ($category->image) {
+                Storage::delete($category->image);
+            }
+
+            return redirect('dashboard/categories')->with('success', 'Category has been deleted!');
+        };
+
+        return back()->with('fail', 'Can\'t deleting the category since sistems\' error');
     }
 }

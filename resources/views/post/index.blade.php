@@ -43,7 +43,7 @@
                 <div id="carouselExampleInterval" class="carousel slide shadow-sm rounded-bottom" data-bs-ride="carousel"
                 style="width:100%; max-height: 600px; display:flex; overflow:hidden; align-items:center">
                     <div class="carousel-inner">
-                    @if( $categories->count() )
+                    @if( $categories->count() >= 3 )
                         <div class="carousel-item active position-relative" data-bs-interval="10000">
                             <a href="blog/category/{{ $categories[0]->slug }}" class="text-decoration-none opacity-75">
                                 <div class="position-absolute text-white" 
@@ -51,7 +51,12 @@
                                     <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[0]->name }}</h3>
                                 </div>
                             </a>
-                        <img src="/assets/img/post/hero-1.jpg" class="d-block w-100 img-fluid" alt="...">
+                            @if( $categories[0]->image)
+                                {{-- asset helper refer to public directory on root --}}
+                                <img src="{{ asset( 'storage/'. $categories[0]->image ) }}" class="d-block w-100 img-fluid" alt="hero-image">
+                            @else
+                                <img src="/assets/img/post/hero-1.jpg" class="d-block w-100 img-fluid" alt="hero-image">
+                            @endif
                         </div>
             
                         <div class="carousel-item" data-bs-interval="2000">
@@ -61,7 +66,12 @@
                                     <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[1]->name }}</h3>
                                 </div>
                             </a>
-                        <img src="/assets/img/post/hero-2.jpg" class="d-block w-100 img-fluid" alt="...">
+                            @if( $categories[1]->image)
+                                {{-- asset helper refer to public directory on root --}}
+                                <img src="{{ asset( 'storage/'. $categories[1]->image ) }}" class="d-block w-100 img-fluid" alt="hero-image">
+                            @else
+                                <img src="/assets/img/post/hero-2.jpg" class="d-block w-100 img-fluid" alt="hero-image">
+                            @endif
                         </div>
             
                         <div class="carousel-item">
@@ -71,7 +81,12 @@
                                     <h3 class="display-4 bg-dark px-5 py-3">{{ $categories[2]->name }}</h3>
                                 </div>
                             </a>
-                        <img src="/assets/img/post/hero-3.jpg" class="d-block w-100 img-fluid" alt="...">
+                            @if( $categories[2]->image)
+                                {{-- asset helper refer to public directory on root --}}
+                                <img src="{{ asset( 'storage/'. $categories[2]->image ) }}" class="d-block w-100 img-fluid" alt="hero-image">
+                            @else
+                                <img src="/assets/img/post/hero-3.jpg" class="d-block w-100 img-fluid" alt="hero-image">
+                            @endif
                         </div>
                     @endif
                     </div>

@@ -12,6 +12,11 @@
       {{ session('success') }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    @elseif( session()->has('fail'))
+    <div class="alert alert-danger alert-dismissible fade show col-lg-7" role="alert">
+      {{ session('fail') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
     <div class="table-responsive  col-lg-7">
@@ -30,14 +35,10 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $category->name }}</td>
                 <td class="">
-                    <a href="/dashboard/categores/{{ $category->slug }}" class="badge bg-info text-white text-decoration-none">
-                        <span data-feather="eye"></span> View
-                    </a>
-                    <a href="/dashboard/categores/{{ $category->slug }}/edit" class="badge bg-warning text-white text-decoration-none">
+                    <a href="/dashboard/categories/{{ $category->slug }}/edit" class="badge bg-warning text-white text-decoration-none">
                         <span data-feather="edit"></span> Edit
                     </a>
-                    
-                    <form action="/dashboard/categores/{{ $category->slug }}" method="post" class="d-inline"> 
+                    <form action="/dashboard/categories/{{ $category->slug }}" method="post" class="d-inline"> 
                       @method('delete')
                       @csrf
                       <button class="badge bg-danger border-0" onclick="return confirm('are you sure?')"><span data-feather="trash-2"></span> Delete</button>

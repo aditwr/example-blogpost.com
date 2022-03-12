@@ -54,7 +54,7 @@ class DashboardPostController extends Controller
             'title' => ['required', 'max:255'],
             'category_id' => ['required'],
             'body' => ['required'],
-            'image' => ['image', 'file', 'max:1024']
+            'image' => ['image', 'file', 'max:1024'] // thumb name
         ]);
 
         // if user upload an image, store it and save pathname to db
@@ -124,23 +124,27 @@ class DashboardPostController extends Controller
         $newSlug = Str::slug($request->title) . '-by-' . Str::slug(auth()->user()->username);
 
         $rules = [
+            // key represent the name of input tag
+            // the value is rule
             'title' => ['required', 'max:255'],
             'category_id' => ['required'],
             'body' => ['required'],
-            'image' => ['required', 'file', 'max:1024'],
+            'image' => ['file', 'max:1024'],
         ];
         // if slug is exists in db, pass the validate for slug
-        if ($newSlug != $post->slug) {
-            $rules['slug'] = ['required', 'unique:posts,slug'];
-        }
+        // if ($newSlug != $post->slug) {
+        //     $rules['slug'] = ['required', 'unique:posts,slug'];
+        // }
 
-        // validate
+        // validate data from input
+        // validated contains the values of the input
         $validated = $request->validate($rules);
+        $validated['slug'] = $newSlug;
 
         // if user upload an image
         if ($request->file('image')) {
             // delete the old image from storage
-            Storage::delete($post->image);
+            Storage::delete($post->image); // Storage relative to public/storage after linked
 
             // store new image, and update image name in db
             $validated['image'] = $request->file('image')->store('post-images');

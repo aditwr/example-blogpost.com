@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Alert;
 
 
 class PageController extends Controller
@@ -12,7 +12,6 @@ class PageController extends Controller
     {
         $data = [
             'title' => 'Home',
-            'active' => 'home'
         ];
         return view('home.index', $data);
     }
@@ -28,7 +27,6 @@ class PageController extends Controller
     {
         $data = [
             'title' => 'About',
-            'active' => 'about'
         ];
         return view('about.index', $data);
     }
@@ -37,7 +35,6 @@ class PageController extends Controller
     {
         $data = [
             'title' => 'Dashboard',
-            'active' => 'blog',
         ];
         return view('dashboard.index', $data);
     }

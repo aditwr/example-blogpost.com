@@ -56,19 +56,6 @@
         
                 </div>
         
-                <div class="container-fluid mt-4 p-2">
-                    <div class="row bg-light">
-                        <form action="" class="my-3">
-                            <h4>Leave a Reply</h4>
-                            <div class="form-floating px-2">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2" class="text-disabled">Comments</label>
-                                <button class="btn btn-secondary mt-2" type="submit">Post Comment</button>
-                            </div>
-                        </form>
-                       
-                    </div>
-                </div>
         </div>
 
         {{-- side menu --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class PostController extends Controller
         $data = [
             'title' => $title,
             'active' => 'blog',
-            'posts' => $posts->paginate(8)->withQueryString(), // paginate() will return paginator / lengtawarepagonator instance
+            'posts' => $posts->paginate(12)->withQueryString(), // paginate() will return paginator / lengtawarepagonator instance
             'categories' => Category::latest()->get()
         ];
         return view('post.index', $data);
@@ -41,10 +42,15 @@ class PostController extends Controller
 
     public function showSinglePost(Post $post)
     {
+        $related_posts = Post::local_RelatedPost($post->category->slug)->latest()->paginate(5)->withQueryString();
+        $comments = Comment::local_PostComments($post->id)->latest()->paginate(10)->withQueryString();
+
         $data = [
             'title' => $post->title,
             'active' => 'blog',
-            'post' => $post
+            'post' => $post,
+            'related_posts' => $related_posts, // related post contains post that has same category as the single post
+            'comments' => $comments
         ];
         return view('post.single', $data);
     }
@@ -65,7 +71,7 @@ class PostController extends Controller
         $data = [
             'title' => $category[0]->name . ' Post',
             'hidden_carousel_and_headpost' => true,
-            'posts' => $posts->latest()->paginate(3)->withQueryString(),
+            'posts' => $posts->latest()->paginate(12)->withQueryString(),
             'categories' => $categories,
         ];
 
@@ -81,7 +87,7 @@ class PostController extends Controller
         $data = [
             'title' => 'Post published by ' . $user[0]->username,
             'hidden_carousel_and_headpost' => true,
-            'posts' => $posts->latest()->paginate(3)->withQueryString(),
+            'posts' => $posts->latest()->paginate(12)->withQueryString(),
             'categories' => $categories,
         ];
 

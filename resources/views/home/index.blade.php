@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark p-0 position-absolute w-100" style="z-index: 10">
     <div class="container">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/blog">
         <img src="/favicon.svg" alt="ex" width="30px" class=""> Blog
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,13 +26,15 @@
           </div>
           <div class="col-lg-2 d-flex justify-content-center justify-content-lg-end gx-0">
             @auth
-              <ul class="navbar-nav mx-auto ms-lg-auto">
+            <ul class="navbar-nav mx-auto ms-lg-auto">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ auth()->user()->username }}
+                  <i class="bi bi-person-fill"></i> {{ auth()->user()->username }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark position-absolute" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-window-reverse"></i> My Dashboard</a></li>
+                    <li><a class="dropdown-item" href="/dashboard/posts"><i class="bi bi-file-earmark-richtext"></i> My Posts</a></li>
+                    <li class="mb-3"><a class="dropdown-item" href="/dashboard/posts/create"><i class="bi bi-pencil-square"></i> Write new Post</a></li>
                     <li>
                         <form action="/logout" method="post">
                             @csrf
@@ -91,7 +93,7 @@ background-position: center top">
     
     // auto typing animations with typed.js
     var typed = new Typed("#typed", {
-        strings: ['Simple Blog Application', 'Made with Laravel 8'],
+        strings: ['Simple Blog Application', 'Made with Laravel 8 and Bootstrap'],
         typeSpeed: 120,
         delaySpeed: 200,
         loop: true

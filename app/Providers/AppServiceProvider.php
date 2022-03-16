@@ -28,10 +28,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
-
-        // make gate
-        Gate::define('admin', function (User $user) {
-            return $user->is_admin;
-        });
     }
 }

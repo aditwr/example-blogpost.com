@@ -11,8 +11,12 @@ class SearchController extends Controller
     // this method is only used to generate and radirect url /blog/search/{search_keyword}
     public function redirect(Request $request)
     {
-        $keyword = $request->input('search');
-        return redirect(url('/blog/search/' . $keyword));
+        if ($request->filled('search')) {
+            $keyword = $request->input('search');
+            return redirect(url('/blog/search/' . $keyword));
+        }
+
+        return redirect()->route('blog');
     }
 
     public function show($keyword)
@@ -24,7 +28,7 @@ class SearchController extends Controller
             'title' => 'Search : ' . $keyword,
             'active' => 'blog',
             'hidden_carousel_and_headpost' => true,
-            'posts' => $posts->paginate(3)->withQueryString(),
+            'posts' => $posts->paginate(12)->withQueryString(),
             'categories' => $categories,
         ];
 

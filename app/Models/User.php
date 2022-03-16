@@ -50,6 +50,15 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // eager load
+
+
+    // local query scope 
     public function scopeLocal_SearchUser($query_builder_for_user_model, $search_key)
     {
         return $query_builder_for_user_model->where('username', 'like', '%' . $search_key . '%')

@@ -1,11 +1,10 @@
 @extends('dashboard.layouts.main')
 
 @section('content_title')
-    <h1 class="h2">My Posts</h1>
+    <h1 class="h2">Manage Posts</h1>
 @endsection
 
 @section('main_content')
-    <h3 class="display-5">List of your posts</h3>
 
     @if( session()->has('success') )
     <div class="alert alert-success alert-dismissible fade show col-lg-10" role="alert">
@@ -16,8 +15,8 @@
 
     <div class="table-responsive  col-lg-10">
         <a href="/dashboard/posts/create" class="btn btn-success">Create New Post</a>
-        <table class="table table-striped table-sm">
-          <thead>
+        <table class="table table-light table-sm mt-2">
+          <thead class="table-dark">
             <tr>
               <th scope="col">No</th>
               <th scope="col">Title</th>

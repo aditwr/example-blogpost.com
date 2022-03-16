@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +26,11 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about']);
 
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
-Route::get('/blog/post/{post:slug}', [PostController::class, 'showSinglePost']);
+Route::get('/blog/post/{post:slug}', [PostController::class, 'showSinglePost'])->name('single_post');
 Route::get('/blog/category/{category_slug}', [PostController::class, 'postByCategory']);
 Route::get('/blog/author/{author_username}', [PostController::class, 'postByAuthor']);
+Route::post('/blog/post/{post}/comment/store', [CommentController::class, 'store']);
+Route::delete('/blog/post/comment/{comment}/delete', [CommentController::class, 'destroy']);
 
 Route::post('/blog/search', [SearchController::class, 'redirect']); // redirect method will generate and redirect to /blog/search/{search_keyword}
 Route::get('/blog/search/{keyword}', [SearchController::class, 'show']); // retrieve post by keyword

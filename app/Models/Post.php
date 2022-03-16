@@ -34,6 +34,11 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 
     /**
      * Get the route key for the model.
@@ -69,6 +74,13 @@ class Post extends Model
     {
         return $query_builder_for_post_model->whereHas('user', function ($query_builder_for_user_model) use ($author_username_value) {
             $query_builder_for_user_model->where('username', $author_username_value);
+        });
+    }
+
+    public function scopeLocal_RelatedPost($query_builder_for_post_model, $category_slug)
+    {
+        return $query_builder_for_post_model->whereHas('category', function ($query_builder_for_category_model) use ($category_slug) {
+            $query_builder_for_category_model->where('slug', $category_slug);
         });
     }
 

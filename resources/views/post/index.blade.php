@@ -10,7 +10,7 @@
     <div class="col-lg-9">
         <div class="container">
             <div class="container-fluid row row-cols-1 row-cols-lg-3 gx-0 mb-1 mb-lg-0 mt-2">
-                <div class="col d-flex align-items-center justify-content-end justify-content-lg-start">
+                <div class="col-xl d-flex align-items-center justify-content-end justify-content-lg-start">
                     {{-- <a href="https://instagram.com/adityaa.wr" class="text-muted text-decoration-none">
                         <p class="fs-5 ">Subscribe or Follow</p>
                     </a> --}}
@@ -18,11 +18,11 @@
                     <a href="https://github.com/adityawahyuramadhan" class="d-block text-decoration-none text-dark fs-5 mx-2"><i class="bi bi-github"></i></a>
                     <a href="https://wa.wizard.id/7efe46" class="d-block text-decoration-none text-dark fs-5 me-2 me-xl-0"><i class="bi bi-whatsapp"></i></a>
                 </div>
-                <div class="col d-flex justify-content-center align-self-center">
+                <div class="col col-xl-6 d-flex justify-content-center align-self-center">
                     <h3 class="display-6 text-dark">{{ $title }}</h3>
                 </div>
-                <div class="col d-flex align-self-center justify-content-center justify-content-lg-end">
-                    <form action="/blog/search" class="d-block w-75" method="post">
+                <div class="col-xl d-flex align-self-center justify-content-center justify-content-lg-end ps-0">
+                    <form action="/blog/search" class="d-block" style="width: 90%" method="post">
                         @csrf
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Search Post.." value="{{ request()->input('search') }}">
@@ -54,7 +54,7 @@
                                 {{-- asset helper refer to public directory on root --}}
                                 <img src="{{ asset( 'storage/'. $categories[0]->image ) }}" class="d-block w-100 img-fluid" alt="hero-image">
                             @else
-                                <img src="/assets/img/post/hero-1.jpg" class="d-block w-100 img-fluid" alt="hero-image">
+                                <img src="/assets/img/category/web-programming.jpg" class="d-block w-100 img-fluid" alt="hero-image">
                             @endif
                             <a href="blog/category/{{ $categories[0]->slug }}" class="text-decoration-none opacity-75 h-100">
                                 <div class="position-absolute text-white" 
@@ -75,7 +75,7 @@
                                 {{-- asset helper refer to public directory on root --}}
                                 <img src="{{ asset( 'storage/'. $categories[1]->image ) }}" class="d-block w-100 img-fluid" alt="hero-image">
                             @else
-                                <img src="/assets/img/post/hero-2.jpg" class="d-block w-100 img-fluid" alt="hero-image">
+                                <img src="/assets/img/category/web-design.jpg" class="d-block w-100 img-fluid" alt="hero-image">
                             @endif
                         </div>
             
@@ -90,7 +90,7 @@
                                 {{-- asset helper refer to public directory on root --}}
                                 <img src="{{ asset( 'storage/'. $categories[2]->image ) }}" class="d-block w-100 img-fluid" alt="hero-image">
                             @else
-                                <img src="/assets/img/post/hero-3.jpg" class="d-block w-100 img-fluid" alt="hero-image">
+                                <img src="/assets/img/category/software-development.jpg" class="d-block w-100 img-fluid" alt="hero-image">
                             @endif
                         </div>
                     @endif
@@ -138,10 +138,10 @@
                                                 <h5 class="card-title fs-6 m-0">{{ $posts[0]->title }}</h5>
                                             </a>
                                             <a href="/blog/author/{{ $posts[0]->user->username }}" class="text-decoration-none">
-                                                <p class="text-muted small m-0">by {{ $posts[0]->user->username }}</p>
+                                                <p class="text-muted small m-0"><i class="bi bi-person-fill"></i> by {{ $posts[0]->user->username }}</p>
                                             </a>
                                             <a href="/blog/category/{{ $posts[0]->category->slug }}" class="text-decoration-none text-light">
-                                                <p class="badge rounded-pill bg-dark">{{ $posts[0]->category->name }}</p>
+                                                <p class="badge rounded-pill bg-dark"><i class="bi bi-bookmark-fill"></i> {{ $posts[0]->category->name }}</p>
                                             </a>
                                             <p class="card-text small opacity-75">{{ $posts[0]->excerpt }}..</p>
                                             <a href="blog/post/{{ $posts[0]->slug }}" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
@@ -162,10 +162,10 @@
                                                 <h5 class="card-title fs-6 m-0">{{ $posts[1]->title }}</h5>
                                             </a>
                                             <a href="/blog/author/{{ $posts[1]->user->username }}" class="text-decoration-none">
-                                                <p class="text-muted small m-0">by {{ $posts[1]->user->username }}</p>
+                                                <p class="text-muted small m-0"><i class="bi bi-person-fill"></i> by {{ $posts[1]->user->username }}</p>
                                             </a>
                                             <a href="/blog/category/{{ $posts[1]->category->slug }}" class="text-decoration-none text-light">
-                                                <p class="badge rounded-pill bg-dark">{{ $posts[1]->category->name }}</p>
+                                                <p class="badge rounded-pill bg-dark"><i class="bi bi-bookmark-fill"></i> {{ $posts[1]->category->name }}</p>
                                             </a>
                                             <p class="card-text small opacity-75">{{ $posts[1]->excerpt }}..</p>
                                             <a href="blog/post/{{ $posts[1]->slug }}" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
@@ -187,10 +187,10 @@
                                                 <h5 class="card-title fs-6 m-0">{{ $posts[2]->title }}</h5>
                                             </a>
                                             <a href="/blog/author/{{ $posts[2]->user->username }}" class="text-decoration-none">
-                                                <p class="text-muted small m-0">by {{ $posts[2]->user->username }}</p>
+                                                <p class="text-muted small m-0"><i class="bi bi-person-fill"></i> by {{ $posts[2]->user->username }}</p>
                                             </a>
                                             <a href="/blog/category/{{ $posts[2]->category->slug }}" class="text-decoration-none text-light">
-                                                <p class="badge rounded-pill bg-dark">{{ $posts[2]->category->name }}</p>
+                                                <p class="badge rounded-pill bg-dark"><i class="bi bi-bookmark-fill"></i> {{ $posts[2]->category->name }}</p>
                                             </a>
                                             <p class="card-text small opacity-75">{{ $posts[2]->excerpt }}..</p>
                                             <a href="blog/post/{{ $posts[2]->slug }}" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
@@ -211,10 +211,10 @@
                                                 <h5 class="card-title fs-6 m-0">{{ $posts[3]->title }}</h5>
                                             </a>
                                             <a href="/blog/author/{{ $posts[3]->user->username }}" class="text-decoration-none">
-                                                <p class="text-muted small m-0">by {{ $posts[3]->user->username }}</p>
+                                                <p class="text-muted small m-0"><i class="bi bi-person-fill"></i> by {{ $posts[3]->user->username }}</p>
                                             </a>
                                             <a href="/blog/category/{{ $posts[3]->category->slug }}" class="text-decoration-none text-light">
-                                                <p class="badge rounded-pill bg-dark">{{ $posts[3]->category->name }}</p>
+                                                <p class="badge rounded-pill bg-dark"><i class="bi bi-bookmark-fill"></i> {{ $posts[3]->category->name }}</p>
                                             </a>
                                             <p class="card-text small opacity-75">{{ $posts[3]->excerpt }}..</p>
                                             <a href="blog/post/{{ $posts[3]->slug }}" class="d-block position-absolute fixed-bottom btn btn-success rounded-0 rounded-bottom">Read more</a>
@@ -225,6 +225,7 @@
                             @endisset
                         @endempty
 
+                        {{-- Posts --}}
                         @foreach($posts as $post)
                             <div class="mx-3 mx-lg-0 my-3 my-lg-2">
                                 <div class="card border-end-0 border-start-0 bg-light pb-2 pb-lg-0">
@@ -243,10 +244,10 @@
                                                 <a href="/blog/post/{{ $post->slug }}" class="text-decoration-none text-dark my-0">
                                                     <h5 class="card-title my-0">{{ $post->title }}</h5>
                                                 </a>
-                                                <p class="text-muted my-0 small">{{ $post->created_at->format('l, d M Y') }} by <a href="/blog/author/{{ $post->user->username }}" class="badge bg-info rounded-pill text-dark text-decoration-none">
+                                                <p class="text-muted my-0 small"><i class="bi bi-clock-fill text-dark"></i> {{ $post->created_at->format('l, d M Y') }} by <a href="/blog/author/{{ $post->user->username }}" class="badge bg-info rounded-pill text-dark text-decoration-none opacity-75">
                                                     <i class="bi bi-person-fill"></i> {{ $post->user->username }}</a></p>
-                                                <a href="/blog/category/{{ $post->category->slug }}" class="mt-0 mb-0">
-                                                    <p class="badge rounded-pill bg-dark my-0">{{ $post->category->name }}</p>
+                                                <a href="/blog/category/{{ $post->category->slug }}" class="mt-0 mb-0 text-decoration-none text-dark">
+                                                    <i class="bi bi-bookmark-fill"></i> <p class="badge rounded-pill bg-dark opacity-75 my-0">{{ $post->category->name }}</p>
                                                 </a>
                                                 <p class="card-text mb-0 mt-1 text-truncate">{{ $post->excerpt }}</p>
                                                 <p class="card-text my-0"><small class="text-muted">Last updated {{ $post->created_at->diffForHumans() }}</small></p>
@@ -256,7 +257,14 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         @endforeach
+
+                        {{-- paginations link --}}
+                        <div class="d-flex justify-content-center mt-5 ">
+                            <div class="d-flex-justify-items-center">{{ $posts->links() }}</div>
+                        </div>
+
                     @else
                         <p class="display-5 text-center">No post found.</p>
                     @endif
@@ -297,14 +305,10 @@
         
         </div>
     </div>
-
     {{-- inlcude ads two --}}
     @include('partials.ads.ads2')
-
-    {{-- paginations link --}}
-    <div class="d-flex justify-content-center mt-5">
-        <div class="d-flex-justify-items-center">{{ $posts->links() }}</div>
-    </div>
-
+</div>
+<div class="d-flex justify-content-center my-2">
+    <a href="#" class="text-decoration-none text-success fs-4 opacity-75"><i class="bi bi-arrow-up-square-fill"></i></a>
 </div>
 @endsection

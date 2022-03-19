@@ -43,7 +43,7 @@ class PostController extends Controller
     public function showSinglePost(Post $post)
     {
         $related_posts = Post::local_RelatedPost($post->category->slug)->latest()->paginate(5)->withQueryString();
-        $comments = Comment::local_PostComments($post->id)->latest()->paginate(10)->withQueryString();
+        $comments = Comment::local_PostComments($post->id)->latest()->paginate(5)->withQueryString();
 
         $data = [
             'title' => $post->title,
@@ -69,7 +69,7 @@ class PostController extends Controller
         $posts = Post::getPostByCategory($category_slug); // return query builder for post model
 
         $data = [
-            'title' => $category[0]->name . ' Post',
+            'title' => $category[0]->name . ' Posts',
             'hidden_carousel_and_headpost' => true,
             'posts' => $posts->latest()->paginate(12)->withQueryString(),
             'categories' => $categories,
@@ -85,7 +85,7 @@ class PostController extends Controller
         $categories = Category::latest()->get();
         $posts = Post::getPostByAuthor($author_username); // return query builder for post model
         $data = [
-            'title' => 'Post published by ' . $user[0]->username,
+            'title' => 'Posts published by @' . $user[0]->username,
             'hidden_carousel_and_headpost' => true,
             'posts' => $posts->latest()->paginate(12)->withQueryString(),
             'categories' => $categories,

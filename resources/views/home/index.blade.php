@@ -63,7 +63,7 @@ background-position: center top">
     <div class="text-center text-white">
         <h1><span id="typed"></span></h1>
         <div class="d-flex justify-content-center px-lg-5 mx-lg-5">
-            <p class="lead px-4 px-lg-5 mx-lg-5">Thanks for visiting my website. This is a simple Blog Application I've made with Laravel 8. This application provides many blog application features, such as reading, writing, editing, and deleting blog posts. I'll very be glad if you like to dig deeper into this website.</p>    
+            <p class="lead px-4 px-lg-5 mx-lg-5">Thanks for visiting my website. This is a simple Blog Application I've made with Laravel 8 and Bootstrap 5. This application provides many blog application features, such as reading, writing, editing, and deleting blog posts. I'll very be glad if you like to dig deeper into this website.</p>    
         </div>
         <p class="lead">
             <a href="/blog" class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark">View Blog</a>

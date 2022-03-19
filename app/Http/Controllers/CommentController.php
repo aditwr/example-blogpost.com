@@ -16,7 +16,7 @@ class CommentController extends Controller
 
         // if user is't authenticated, redirect back with error flash message
         if (!auth()->user()) {
-            return back()->with('deny', 'You must login first to get access to write comments.');
+            return back()->with('deny', 'You must login first to get access to write a comments.');
         }
 
         // user_id, post_id, body

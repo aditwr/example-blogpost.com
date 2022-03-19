@@ -144,7 +144,9 @@ class DashboardPostController extends Controller
         // if user upload an image
         if ($request->file('image')) {
             // delete the old image from storage
-            Storage::delete($post->image); // Storage relative to public/storage after linked
+            if ($post->image) {
+                Storage::delete($post->image); // Storage relative to public/storage after linked
+            }
 
             // store new image, and update image name in db
             $validated['image'] = $request->file('image')->store('post-images');

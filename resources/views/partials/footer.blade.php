@@ -23,18 +23,15 @@
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-2 border-top bg-dark">
             <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1">
-                <img src="/favicon.svg" width="20" style="box-shadow: .5px .5px .5px #fff, -.5px -.5px .5px #fff">
-            </a>
-            <span class="text-white">&copy; 2022 Aditya Wahyu</span>
+            <span class="text-white small"> <small>&copy;2022 Aditya Wahyu</small> </span>
             </div>
     
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a onclick="alert('ouu, sorry guys, i don\'t have twitter. however, you can visit me on instagram or facebook')" class="text-white" href="#"><svg class="bi" width="24" height="24">
+            <li class="ms-3"><a onclick="alert('ouu, sorry guys, i don\'t have twitter. however, you can visit me on instagram or facebook')" class="text-white" href="#"><svg class="bi" width="20" height="20">
                     <use xlink:href="#twitter" /></svg></a></li>
-            <li class="ms-3"><a class="text-white" href="https://instagram.com/adityaa.wr"><svg class="bi" width="24" height="24">
+            <li class="ms-3"><a class="text-white" href="https://instagram.com/adityaa.wr"><svg class="bi" width="20" height="20">
                     <use xlink:href="#instagram" /></svg></a></li>
-            <li class="ms-3"><a class="text-white" href="#"><svg class="bi" width="24" height="24">
+            <li class="ms-3"><a class="text-white" href="#"><svg class="bi" width="20" height="20">
                     <use xlink:href="#facebook" /></svg></a></li>
             </ul>
         </footer>

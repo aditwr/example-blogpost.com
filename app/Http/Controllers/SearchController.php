@@ -25,7 +25,7 @@ class SearchController extends Controller
         $categories = Category::latest()->get();
 
         $data = [
-            'title' => 'Search : ' . $keyword,
+            'title' => 'Search : ' . $keyword, // get keyword variable from the uri
             'active' => 'blog',
             'hidden_carousel_and_headpost' => true,
             'posts' => $posts->paginate(12)->withQueryString(),

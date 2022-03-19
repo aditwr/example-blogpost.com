@@ -33,17 +33,17 @@
                 <td>{{ $post->category->name }}</td>
                 <td>{{ $post->created_at->format('l, d M Y') }}</td>
                 <td class="">
-                    <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info text-white text-decoration-none">
+                    <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info text-white text-decoration-none ">
                         <span data-feather="eye"></span> View
                     </a>
-                    <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning text-white text-decoration-none">
+                    <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning text-white text-decoration-none my-1 my-lg-0">
                         <span data-feather="edit"></span> Edit
                     </a>
                     
                     <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline"> 
                       @method('delete')
                       @csrf
-                      <button class="badge bg-danger border-0" onclick="return confirm('are you sure?')"><span data-feather="trash-2"></span> Delete</button>
+                      <button class="badge bg-danger border-0" onclick="return confirm('are you sure deleting this post?')"><span data-feather="trash-2"></span> Delete</button>
                     </form>
                 </td>
                 </tr>

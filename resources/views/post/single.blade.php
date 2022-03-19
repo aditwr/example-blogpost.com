@@ -1,5 +1,15 @@
 @extends('layouts.main')
 @section('main')
+<head>
+    <style>
+        @media only screen and (max-width: 600px) {
+    .hero-img {
+        height: 300px !important;
+    }
+    }
+    </style>
+</head>
+
 <div class="container-fluid row gx-0 p-0 m-0">
     {{-- include ads one --}}
     @include('partials.ads.ads1')
@@ -22,9 +32,9 @@
                         <div class="container mb-2 mt-0 px-2 px-xl-0">
                             <h2 class="display-4 text-center">{{ $post->title }}</h2>
                             <hr>
-                            <p class="my-0 small">{{ $post->created_at->format('l, d M Y') }} - by <a href="/blog/author/{{ $post->user->username }}" class="text-primary">{{ $post->user->username }}</a> - <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></p>
+                            <p class="my-0 small opacity-75">{{ $post->created_at->format('l, d M Y') }} - by <a href="/blog/author/{{ $post->user->username }}" class="text-primary">{{ $post->user->username }}</a> - <small class="">{{ $post->created_at->diffForHumans() }}</small></p>
                             
-                            <p class="small fw-bold">Category : <a class="text-decoration-none rounded-pill text-light badge bg-secondary " href="/blog/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>      
+                            <p class="small">Category : <a class="text-decoration-none rounded-pill text-light badge bg-dark " href="/blog/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>      
                         </div>
                         
                     </div>
@@ -32,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="d-flex align-items-center overflow-hidden" style="height:400px">
+            <div class="d-flex align-items-center overflow-hidden hero-img" style="height:500px">
                 @if( $post->image )
                     <img src="{{ asset('storage/' . $post->image) }}" alt="hero_image" class="img-fluid w-100">
                 @else
@@ -86,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="py-3 py-lg-4">
+                        <div class="py-3 py-lg-4 px-2 text-center text-xl-start">
                             <h3 class="h3 fst-italic">Contact Us</h3>
                             <a href="https://instagram.com/adityaa.wr" class="d-block text-decoration-none text-dark "><i class="bi bi-instagram"></i> Instagram</a>
                             <a href="https://github.com/adityawahyuramadhan" class="d-block text-decoration-none text-dark "><i class="bi bi-github"></i> Github</a>
@@ -116,15 +126,15 @@
                         <p class="lead">Comments</p>
                         @foreach( $comments as $comment )
                         <div class="bg-white rounded row g-0 p-1 my-2">
-                            <div class="col-2 col-md-2 col-xl-1 d-flex justify-content-center">
+                            <div class="col-2 col-md-2 col-xl-1 d-flex justify-content-center align-items-start">
                                 <img src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"/>
                             </div>
                             <div class="col-9 ps-1">
-                                <a href="/blog/author/{{ $comment->user->username }}" class="text-decoration-none text-dark">
-                                    <p class="fs-6 fw-bold my-0">{{ $comment->user->username }}</p>
+                                <a href="/blog/author/{{ $comment->user->username }}" class="text-decoration-none text-dark my-0">
+                                    <p class="fs-6 fw-bold my-0 opacity-75">{{ $comment->user->username }}</p>
                                 </a>
                                 <p class="small my-0" >{{ $comment->body }}</p>
-                                <p class="small my-0 text-muted">{{ $comment->created_at->format('l, d M Y : h:m:s') }}</p>
+                                <p class="small my-0 text-muted"><small>{{ $comment->created_at->format('D, d M Y - H:i') }}</small></p>
                             </div>
 
                             @isset( auth()->user()->id )
@@ -162,7 +172,7 @@
         </div>
     
         <div class="container text-center my-3">
-            <a href="/blog" class="btn btn-primary text-decoration-none text-light">Back to Blog</a>
+            <a href="/blog" class="btn btn-primary text-decoration-none text-light"><i class="bi bi-arrow-left-square"></i> Back to Blog</a>
         </div>
     </div>
 
@@ -170,13 +180,16 @@
     @include('partials.ads.ads2')
 
 </div>
+<div class="d-flex justify-content-center my-2">
+    <a href="#" class="text-decoration-none text-success fs-4 opacity-75"><i class="bi bi-arrow-up-square-fill"></i></a>
+</div>
 
 {{-- notification --}}
 @if( session()->has('deny') )
     <script>
         Swal.fire(
         'You must Login.',
-        "{{ session('fail') }}",
+        "{{ session('deny') }}",
         'warning'
         )
     </script>

@@ -5,11 +5,20 @@
 @endsection
 
 @section('main_content')
+<head>
+    <style>
+        @media only screen and (max-width: 600px) {
+    .hero-img {
+        height: 300px !important;
+    }
+    }
+    </style>
+</head>
     
 <div class="container-fluid">
             
-    <div class="container mb-3 row gx-0"> 
-        <div class="col-lg-10 row justify-content-start m-0">
+    <div class="container mb-3 row gx-0 px-0"> 
+        <div class="col-xl-10 row justify-content-start m-0 px-0 gx-0">
         
                 <div class="container bg-light px-0">
                     
@@ -29,7 +38,7 @@
                         </div>
                     </div>
         
-                    <div class="d-flex align-items-center overflow-hidden" style="height:400px">
+                    <div class="d-flex align-items-center overflow-hidden hero-img" style="height:500px">
                         @if( $post->image )
                             <img src="{{ asset('storage/' . $post->image) }}" alt="hero_image" class="img-fluid w-100">
                         @else
@@ -59,10 +68,10 @@
         </div>
 
         {{-- side menu --}}
-        <div class="col-lg-2">
-            <div class="bg-light rounded px-3 pb-3 pt-3">
+        <div class="col-xl-2">
+            <div class="bg-light rounded px-3 pb-3 pt-3 mx-0 mx-sm-2 my-2 my-sm-2">
                 <p class="lead">Take action for this Post</p>
-                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning mb-1"><span data-feather="edit" ></span> Edit this Post</a>
+                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning mb-0 mb-xl-2"><span data-feather="edit" ></span> Edit this Post</a>
                 <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline"> 
                     @method('delete')
                     @csrf
